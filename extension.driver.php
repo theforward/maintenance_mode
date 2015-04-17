@@ -1,5 +1,9 @@
 <?php
 
+require 'lib/Symfony/Component/HttpFoundation/IpUtils.php';
+
+use Symfony\Component\HttpFoundation\IpUtils;
+
 Class extension_maintenance_mode extends Extension
 {
     public function install()
@@ -215,7 +219,7 @@ Class extension_maintenance_mode extends Extension
 
                 $whitelist = explode(' ', $whitelist);
 
-                if (in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
+                if (IpUtils::checkIp($_SERVER['REMOTE_ADDR'], $whitelist)) {
 
                     return;
                 }
